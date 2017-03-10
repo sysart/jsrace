@@ -30,21 +30,21 @@ provider:
 
 functions:
   create:
-    handler: functions/testcases/create.create
+    handler: functions/testcases/index.create
     events:
       - http:
           path: testcases
           method: post
           cors: true
   get:
-    handler: functions/testcases/get.get
+    handler: functions/testcases/index.get
     events:
       - http:
           path: testcases/{id}
           method: get
           cors: true
   list:
-    handler: functions/testcases/list.list
+    handler: functions/testcases/index.list
     events:
       - http:
           path: testcases
