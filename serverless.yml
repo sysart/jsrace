@@ -40,6 +40,13 @@ functions:
           path: testcases/{id}
           method: get
           cors: true
+  list:
+    handler: functions/testcases/list.list
+    events:
+      - http:
+          path: testcases
+          method: get
+          cors: true
 
 package:
   exclude:
