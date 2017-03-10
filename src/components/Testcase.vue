@@ -19,9 +19,14 @@
           </div>
         </div>
       </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <button v-on:click="saveTestCase" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          Save
+        </button>
+      </div>
     </section>
 
-    <test v-for="test in tests"></test>
+    <test v-for="test in testcase.tests"></test>
 
     <button v-on:click="addTest" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-test-btn">
       <i class="material-icons">add</i>
@@ -41,17 +46,23 @@ export default {
 
   data () {
     return {
-      tests: [
-        {
-          title: 'Test 1'
-        }
-      ]
+      testcase: {
+        tests: [
+          {
+            title: 'Test 1'
+          }
+        ]
+      }
     }
   },
 
   methods: {
-    addTest: function () {
-      this.tests.push({title: 'Test nakki'})
+    addTest () {
+      this.testcase.tests.push({title: 'Test nakki'})
+    },
+
+    saveTestCase () {
+
     }
   }
 }
