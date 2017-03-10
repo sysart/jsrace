@@ -2,12 +2,21 @@
 
 const uuid = require('uuid');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const Joi = require('joi');
+const schema = require('./schema');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const body = JSON.parse(event.body);
+  const validation = Joi.validate(body, schema);
+
+  if(validation.error) {
+    console.error(validation.error);
+    callback(new Error('Invalid data'));
+    return;
+  }
 
   const item = {
     id: uuid.v1(),
