@@ -1,8 +1,10 @@
 {
   "devDependencies": {
-    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
     "aws-sdk": "^2.26.0",
+    "babel-preset-latest": "^6.22.0",
     "joi": "^10.2.2",
+    "serverless-babel-plugin": "^0.1.3",
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
     "uuid": "^3.0.1"
   }
 }
