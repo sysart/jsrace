@@ -1,4 +1,4 @@
-service: jsrace
+service: jsracex
 
 frameworkVersion: ">=1.2.0 <2.0.0"
 
@@ -6,7 +6,7 @@ plugins:
   - serverless-single-page-app-plugin
 
 custom:
-  s3Bucket: jsrace
+  s3Bucket: jsracex-2017
 
 provider:
   name: aws
