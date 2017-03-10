@@ -6,29 +6,29 @@
 
           <div class="mdl-cell mdl-cell--12-col-desktop">
             <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" id="testcase-name">
+              <input v-model="testcase.title" class="mdl-textfield__input" type="text">
               <label class="mdl-textfield__label" for="testcase-name">Name</label>
             </div>
           </div>
 
           <div class="mdl-cell mdl-cell--12-col-desktop">
             <div class="mdl-textfield mdl-js-textfield">
-              <textarea class="mdl-textfield__input" type="text" rows= "3" id="testcase-description" ></textarea>
+              <textarea v-model="testcase.description" class="mdl-textfield__input" type="text" rows="3"></textarea>
               <label class="mdl-textfield__label" for="testcase-description">Description</label>
             </div>
           </div>
         </div>
       </div>
       <div class="mdl-card__actions mdl-card--border">
-        <button v-on:click="saveTestCase" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        <button @click="saveTestCase" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
           Save
         </button>
       </div>
     </section>
 
-    <test v-for="test in testcase.tests"></test>
+    <test :test="test" v-for="test in testcase.data.tests" :key="test.id"></test>
 
-    <button v-on:click="addTest" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-test-btn">
+    <button @click="addTest" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-test-btn">
       <i class="material-icons">add</i>
     </button>
   </div>
@@ -36,6 +36,8 @@
 
 <script>
 import Test from './Test'
+import Api from '../Api'
+import uuid from 'uuid'
 
 export default {
 
@@ -47,22 +49,52 @@ export default {
   data () {
     return {
       testcase: {
-        tests: [
-          {
-            title: 'Test 1'
-          }
-        ]
+        data: {
+          tests: [
+            {
+              id: uuid.v1(),
+              name: 'Test 1',
+              code: ''
+            }
+          ]
+        }
       }
+    }
+  },
+
+  beforeRouteEnter (to, from, next) {
+    if (to.params.id) {
+      Api.get(to.params.id).then(testcase => {
+        next(vm => {
+          vm.testcase = testcase
+        })
+      }, err => {
+        console.error(err)
+        next()
+      })
+    } else {
+      next()
     }
   },
 
   methods: {
     addTest () {
-      this.testcase.tests.push({title: 'Test nakki'})
+      this.testcase.data.tests.push({
+        id: uuid.v1(),
+        name: '',
+        code: ''
+      })
     },
 
     saveTestCase () {
-
+      Api.save(this.testcase).then(response => {
+        this.$router.push({
+          name: 'testcase',
+          params: {
+            id: response.id
+          }
+        })
+      })
     }
   }
 }

@@ -10,7 +10,8 @@ module.exports.list = (event, ctx, cb) => {
     AttributesToGet: [
       'id',
       'title',
-      'createdAt'
+      'createdAt',
+      'description'
     ]
   };
 

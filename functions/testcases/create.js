@@ -2,17 +2,28 @@
 
 const uuid = require('uuid');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const Joi = require('joi');
+const schema = require('./schema');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body);
+  const body = JSON.parse(event.body);
+  const validation = Joi.validate(body, schema);
+
+  if(validation.error) {
+    console.error(validation.error);
+    callback(new Error('Invalid data'));
+    return;
+  }
 
   const item = {
     id: uuid.v1(),
-    data: data,
-    createdAt: timestamp
+    data: body.data,
+    createdAt: timestamp,
+    title: body.title,
+    description: body.description
   };
 
   const params = {
@@ -23,7 +34,7 @@ module.exports.create = (event, context, callback) => {
   dynamoDb.put(params, (error, result) => {
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create the todo item.'));
+      callback(new Error('Couldn\'t create item.'));
       return;
     }
 
