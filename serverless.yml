@@ -51,7 +51,8 @@ functions:
 
 package:
   exclude:
-    - node_modules/**
+    - client/**
+    - app/**
 
 resources:
   Resources:
