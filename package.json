@@ -70,10 +70,7 @@
     "rimraf": "^2.6.0",
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
-<<<<<<< HEAD
-=======
     "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
->>>>>>> a120612f90d70831b5c4a732f5b2017d233ef35f
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
