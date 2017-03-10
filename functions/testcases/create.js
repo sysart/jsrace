@@ -25,7 +25,7 @@ module.exports.create = (event, context, callback) => {
   dynamoDb.put(params, (error, result) => {
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create the todo item.'));
+      callback(new Error('Couldn\'t create item.'));
       return;
     }
 
