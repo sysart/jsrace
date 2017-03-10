@@ -35,7 +35,6 @@
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.26.1",
     "eslint": "^3.14.1",
-    "eslint-config-airbnb-base": "^11.0.1",
     "eslint-config-standard": "^7.0.1",
     "eslint-friendly-formatter": "^2.0.7",
     "eslint-import-resolver-webpack": "^0.8.1",
@@ -71,6 +70,10 @@
     "rimraf": "^2.6.0",
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
+<<<<<<< HEAD
+=======
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
+>>>>>>> a120612f90d70831b5c4a732f5b2017d233ef35f
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
