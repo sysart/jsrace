@@ -2,12 +2,21 @@
   <div class="testcase-view">
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
       <div class="mdl-card mdl-cell mdl-cell--12-col">
-        <div class="mdl-card__title">
-          <h4 class="mdl-card__title-text">Testcase</h4>
-        </div>
-
         <div class="mdl-card__supporting-text">
-          Testcase description goes here
+
+          <div class="mdl-cell mdl-cell--12-col-desktop">
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="testcase-name">
+              <label class="mdl-textfield__label" for="testcase-name">Name</label>
+            </div>
+          </div>
+
+          <div class="mdl-cell mdl-cell--12-col-desktop">
+            <div class="mdl-textfield mdl-js-textfield">
+              <textarea class="mdl-textfield__input" type="text" rows= "3" id="testcase-description" ></textarea>
+              <label class="mdl-textfield__label" for="testcase-description">Description</label>
+            </div>
+          </div>
         </div>
       </div>
     </section>
