@@ -7,14 +7,14 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body.data);
+  const body = JSON.parse(event.body);
 
   const item = {
     id: uuid.v1(),
-    data: data,
+    data: body.data,
     createdAt: timestamp,
-    title: event.body.title,
-    description: event.body.description
+    title: body.title,
+    description: body.description
   };
 
   const params = {
