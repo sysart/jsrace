@@ -44,7 +44,7 @@ module.exports.create = (event, context, callback) => {
 
     const response = {
       statusCode: 200,
-      headers
+      headers,
       body: JSON.stringify({
         id: item.id
       }),
