@@ -10,6 +10,7 @@ custom:
   s3Bucket: jsracex-2017
   babelPresets:
     - latest
+    - stage-3
 
 provider:
   name: aws
