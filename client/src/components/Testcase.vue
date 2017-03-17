@@ -1,31 +1,28 @@
 <template>
   <div>
-    <section class="mdc-card">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-        <div class="mdc-card__supporting-text">
+    <section class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <div class="row">
+              <div class="col s12 input-field">
+                <input v-model="testcase.title" type="text">
+                <label for="testcase-name" class="active">Name</label>
+              </div>
 
-          <div class="mdc-cell mdc-cell--12-col-desktop">
-            <div class="mdc-textfield mdc-js-textfield">
-              <input v-model="testcase.title" class="mdc-textfield__input" type="text">
-              <label class="mdc-textfield__label" for="testcase-name">Name</label>
+              <div class="col s12 input-field">
+                <textarea v-model="testcase.description" type="text" rows="3" class="materialize-textarea"></textarea>
+                <label for="testcase-description" class="active">Description</label>
+              </div>
             </div>
+
           </div>
 
-          <div class="mdc-cell mdc-cell--12-col-desktop">
-            <div class="mdc-textfield mdc-js-textfield">
-              <textarea v-model="testcase.description" class="mdc-textfield__input" type="text" rows="3"></textarea>
-              <label class="mdc-textfield__label" for="testcase-description">Description</label>
-            </div>
+          <div class="card-action">
+            <a href="#" @click="saveTestCase">Save</a>
+            <a href="#" @click="runTestcase">Run</a>
           </div>
         </div>
-      </div>
-      <div class="mdc-card__actions">
-        <button @click="saveTestCase" class="mdc-button mdc-button--compact mdc-card__action">
-          Save
-        </button>
-        <button @click="runTestcase" class="mdc-button mdc-button--compact mdc-card__action">
-          Run
-        </button>
       </div>
     </section>
 

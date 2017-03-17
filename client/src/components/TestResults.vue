@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="mdc-card">
     <table>
       <thead>
         <th>Name</th>
@@ -19,7 +19,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 </template>
 
 <script>

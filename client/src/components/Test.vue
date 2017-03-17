@@ -24,7 +24,4 @@ export default {
 </script>
 
 <style scoped>
-  .mdc-card {
-    margin-bottom: 32px;
-  }
 </style>
