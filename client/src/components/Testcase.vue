@@ -35,15 +35,13 @@
       Add Setup Code
     </button>
 
-    <section v-if="hasSetup" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-      <div class="mdl-card mdl-cell mdl-cell--12-col">
-        <div class="mdl-card__title mdl-card--expand">
-          Setup code
-          <button @click="removeSetup">Remove</button>
-        </div>
-        <div class="mdl-card__supporting-text">
-          <CodeEditor v-model="testcase.data.setup"></CodeEditor>
-        </div>
+    <section v-if="hasSetup" class="mdc-card">
+      <div class="mdc-card__title">
+        Setup code
+        <button @click="removeSetup">Remove</button>
+      </div>
+      <div class="mdc-card__supporting-text">
+        <CodeEditor v-model="testcase.data.setup"></CodeEditor>
       </div>
     </section>
 
