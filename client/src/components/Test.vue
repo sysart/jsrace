@@ -1,12 +1,23 @@
 <template>
-  <section class="mdc-card">
-    <div class="mdc-card__supporting-text">
-      <div class="mdc-textfield mdc-js-textfield">
-        <input v-model="test.name" class="mdc-textfield__input" type="text">
-        <label class="mdc-textfield__label" for="test-name">Test name</label>
-        <button @click="$emit('remove', test)">Remove</button>
+  <section class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+
+          <div class="row">
+            <div class="col s12 input-field">
+              <input v-model="test.name" type="text">
+              <label class="active" for="test-name">Test name</label>
+            </div>
+          </div>
+
+          <CodeEditor v-model="test.code"></CodeEditor>
+        </div>
+
+        <div class="card-action">
+          <a href="#" @click="$emit('remove', test)">Remove</a>
+        </div>
       </div>
-      <CodeEditor v-model="test.code"></CodeEditor>
     </div>
   </section>
 </template>

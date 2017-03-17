@@ -1,24 +1,30 @@
 <template>
-  <section class="mdc-card">
-    <table>
-      <thead>
-        <th>Name</th>
-        <th>OPS</th>
-        <th>Samples</th>
-        <th>&nbsp;</th>
-      </thead>
-      <tbody>
-        <tr v-for="result in results">
-          <td>{{result.test.name}}</td>
-          <td>{{result.hz}}</td>
-          <td>{{result.count}}</td>
-          <td>
-            <span v-if="result.running">RUNNING</span>
-            <span v-if="result.fastest">FASTEST!</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <section class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <table>
+            <thead>
+              <th>Name</th>
+              <th>OPS</th>
+              <th>Samples</th>
+              <th>&nbsp;</th>
+            </thead>
+            <tbody>
+              <tr v-for="result in results">
+                <td>{{result.test.name}}</td>
+                <td>{{result.hz}}</td>
+                <td>{{result.count}}</td>
+                <td>
+                  <span v-if="result.running">RUNNING</span>
+                  <span v-if="result.fastest">FASTEST!</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 

@@ -32,14 +32,16 @@
       Add Setup Code
     </button>
 
-    <section v-if="hasSetup" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-      <div class="mdl-card mdl-cell mdl-cell--12-col">
-        <div class="mdl-card__title mdl-card--expand">
-          Setup code
-          <button @click="removeSetup">Remove</button>
-        </div>
-        <div class="mdl-card__supporting-text">
-          <CodeEditor v-model="testcase.data.setup"></CodeEditor>
+    <section v-if="hasSetup" class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Setup code</span>
+            <CodeEditor v-model="testcase.data.setup"></CodeEditor>
+          </div>
+          <div class="card-action">
+            <a href="#" @click="removeSetup">Remove</a>
+          </div>
         </div>
       </div>
     </section>
@@ -51,7 +53,7 @@
       @remove="removeTest"
     ></Test>
 
-    <button @click="addTest" class="mdc-fab material-icons add-test-btn">
+    <button @click="addTest" class="btn-floating btn-large green add-test-btn">
       <i class="material-icons">add</i>
     </button>
   </div>
