@@ -16,8 +16,8 @@
                 <td>{{result.hz}}</td>
                 <td>{{result.count}}</td>
                 <td>
-                  <span v-if="result.running">RUNNING</span>
-                  <span v-if="result.fastest">FASTEST!</span>
+                  <span v-if="result.running" class="badge new blue" data-badge-caption="Running..."></span>
+                  <span v-if="result.fastest" class="badge new" data-badge-caption="Fastest!"></span>
                 </td>
               </tr>
             </tbody>
