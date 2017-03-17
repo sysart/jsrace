@@ -1,7 +1,7 @@
 <template>
-  <div class="testcase-view">
-    <section class="mdc-layout-grid">
-      <div class="mdc-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+  <div>
+    <section class="mdc-card">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
         <div class="mdc-card__supporting-text">
 
           <div class="mdc-cell mdc-cell--12-col-desktop">
@@ -19,11 +19,11 @@
           </div>
         </div>
       </div>
-      <div class="mdc-card__actions mdc-card--border">
-        <button @click="saveTestCase" class="mdc-button mdc-button--colored mdc-js-button mdc-js-ripple-effect">
+      <div class="mdc-card__actions">
+        <button @click="saveTestCase" class="mdc-button mdc-button--compact mdc-card__action">
           Save
         </button>
-        <button @click="runTestcase">
+        <button @click="runTestcase" class="mdc-button mdc-button--compact mdc-card__action">
           Run
         </button>
       </div>
