@@ -26,6 +26,8 @@ export default class TestRunner {
 
     this.data.tests.forEach(test => {
       suite.add(test.name, test.code, {
+        setup: this.data.setup,
+
         onStart: () => {
           benchmarkResult.running = true
         },

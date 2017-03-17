@@ -29,9 +29,30 @@
       </div>
     </section>
 
-    <TestResults :results="this.results"></TestResults>
+    <TestResults :results="results"></TestResults>
 
-    <Test :test="test" v-for="test in testcase.data.tests" :key="test.id"></Test>
+    <button @click="addSetup" v-if="!hasSetup">
+      Add Setup Code
+    </button>
+
+    <section v-if="hasSetup" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+      <div class="mdl-card mdl-cell mdl-cell--12-col">
+        <div class="mdl-card__title mdl-card--expand">
+          Setup code
+          <button @click="removeSetup">Remove</button>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <CodeEditor v-model="testcase.data.setup"></CodeEditor>
+        </div>
+      </div>
+    </section>
+
+    <Test
+      v-for="test in testcase.data.tests"
+      :key="test.id"
+      :test="test"
+      @remove="removeTest"
+    ></Test>
 
     <button @click="addTest" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-test-btn">
       <i class="material-icons">add</i>
@@ -45,6 +66,7 @@ import TestResults from './TestResults'
 import Api from '../Api'
 import uuid from 'uuid'
 import TestRunner from '../TestRunner'
+import CodeEditor from './CodeEditor'
 
 export default {
 
@@ -52,13 +74,15 @@ export default {
 
   components: {
     Test,
-    TestResults
+    TestResults,
+    CodeEditor
   },
 
   data () {
     return {
       testcase: {
         data: {
+          setup: false,
           tests: [
             {
               id: uuid.v1(),
@@ -87,6 +111,12 @@ export default {
     }
   },
 
+  computed: {
+    hasSetup () {
+      return this.testcase.data.setup !== false
+    }
+  },
+
   methods: {
     addTest () {
       this.testcase.data.tests.push({
@@ -94,6 +124,13 @@ export default {
         name: '',
         code: ''
       })
+    },
+
+    removeTest (test) {
+      let i = this.testcase.data.tests.indexOf(test)
+      if (i !== -1) {
+        this.testcase.data.tests.splice(i, 1)
+      }
     },
 
     saveTestCase () {
@@ -105,6 +142,14 @@ export default {
           }
         })
       })
+    },
+
+    addSetup () {
+      this.testcase.data.setup = ''
+    },
+
+    removeSetup () {
+      this.testcase.data.setup = false
     },
 
     runTestcase () {

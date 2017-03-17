@@ -5,6 +5,7 @@
         <div class="mdl-textfield mdl-js-textfield">
           <input v-model="test.name" class="mdl-textfield__input" type="text">
           <label class="mdl-textfield__label" for="test-name">Test name</label>
+          <button @click="$emit('remove', test)">Remove</button>
         </div>
         <CodeEditor v-model="test.code"></CodeEditor>
       </div>
