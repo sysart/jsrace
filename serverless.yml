@@ -4,13 +4,11 @@ frameworkVersion: ">=1.2.0 <2.0.0"
 
 plugins:
   - serverless-single-page-app-plugin
-  - serverless-babel-plugin
+  - serverless-webpack
 
 custom:
   s3Bucket: jsracex-2017
-  babelPresets:
-    - latest
-    - stage-3
+  webpackIncludeModules: true
 
 provider:
   name: aws
@@ -31,26 +29,40 @@ provider:
 
 functions:
   create:
-    handler: functions/testcases/index.create
+    handler: handler.create
     events:
       - http:
           path: testcases
           method: post
           cors: true
+          integration: lambda
+          request:
+            template:
+              application/json: "$input.json('$')"
   get:
-    handler: functions/testcases/index.get
+    handler: handler.get
     events:
       - http:
           path: testcases/{id}
           method: get
           cors: true
+          integration: lambda
+          request:
+            parameters:
+              paths:
+                id: true
+          response:
+            headers:
+              Cache-Control: "'max-age=86400'"
+
   list:
-    handler: functions/testcases/index.list
+    handler: handler.list
     events:
       - http:
           path: testcases
           method: get
           cors: true
+          integration: lambda
 
 package:
   exclude:

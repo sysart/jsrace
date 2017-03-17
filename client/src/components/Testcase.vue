@@ -31,11 +31,7 @@
 
     <TestResults :results="results"></TestResults>
 
-    <button @click="addSetup" v-if="!hasSetup">
-      Add Setup Code
-    </button>
-
-    <section v-if="hasSetup" class="mdc-card">
+    <section class="mdc-card">
       <div class="mdc-card__title">
         Setup code
         <button @click="removeSetup">Remove</button>
@@ -80,7 +76,7 @@ export default {
     return {
       testcase: {
         data: {
-          setup: false,
+          setup: '',
           tests: [
             {
               id: uuid.v1(),
@@ -106,12 +102,6 @@ export default {
       })
     } else {
       next()
-    }
-  },
-
-  computed: {
-    hasSetup () {
-      return this.testcase.data.setup !== false
     }
   },
 

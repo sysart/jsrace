@@ -4,7 +4,10 @@ export default class Api {
   static save (test) {
     return fetch(`${URL}/testcases`, {
       method: 'POST',
-      body: JSON.stringify(test)
+      body: JSON.stringify(test),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then(response => {
       return response.json()
     })

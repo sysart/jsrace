@@ -13,8 +13,7 @@ const headers = {
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
-  const body = JSON.parse(event.body);
-  const validation = Joi.validate(body, schema);
+  const validation = Joi.validate(event, schema);
 
   if(validation.error) {
     console.error(validation.error);
@@ -23,11 +22,9 @@ module.exports.create = (event, context, callback) => {
   }
 
   const item = {
+    ...event,
     id: uuid.v1(),
-    data: body.data,
     createdAt: timestamp,
-    title: body.title,
-    description: body.description
   };
 
   const params = {
@@ -42,15 +39,9 @@ module.exports.create = (event, context, callback) => {
       return;
     }
 
-    const response = {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        id: item.id
-      }),
-    };
-
-    callback(null, response);
+    callback(null, {
+      id: item.id
+    });
   });
 };
 
@@ -58,7 +49,7 @@ module.exports.get = (event, context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
-      id: event.pathParameters.id,
+      id: event.path.id,
     },
   };
 
@@ -69,13 +60,7 @@ module.exports.get = (event, context, callback) => {
       return;
     }
 
-    const response = {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(result.Item),
-    };
-
-    callback(null, response);
+    callback(null, result.Item);
   });
 };
 
@@ -97,12 +82,6 @@ module.exports.list = (event, ctx, cb) => {
       return;
     }
 
-    const res = {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(data)
-    };
-
-    cb(null, res);
+    cb(null, data);
   });
 };
