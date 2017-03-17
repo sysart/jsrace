@@ -23,8 +23,13 @@
         <button @click="saveTestCase" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
           Save
         </button>
+        <button @click="runTestcase">
+          Run
+        </button>
       </div>
     </section>
+
+    <testResults :results="this.results"></TestResults>
 
     <test :test="test" v-for="test in testcase.data.tests" :key="test.id"></test>
 
@@ -36,14 +41,18 @@
 
 <script>
 import Test from './Test'
+import TestResults from './TestResults'
 import Api from '../Api'
 import uuid from 'uuid'
+import TestRunner from '../TestRunner'
 
 export default {
 
   name: 'testcase',
+
   components: {
-    Test
+    Test,
+    TestResults
   },
 
   data () {
@@ -58,7 +67,8 @@ export default {
             }
           ]
         }
-      }
+      },
+      results: null
     }
   },
 
@@ -95,6 +105,11 @@ export default {
           }
         })
       })
+    },
+
+    runTestcase () {
+      const runner = new TestRunner(this.testcase.data)
+      this.results = runner.run()
     }
   }
 }
