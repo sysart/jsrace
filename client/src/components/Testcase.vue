@@ -1,26 +1,26 @@
 <template>
   <div class="testcase-view">
-    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-      <div class="mdl-card mdl-cell mdl-cell--12-col">
-        <div class="mdl-card__supporting-text">
+    <section class="mdc-layout-grid">
+      <div class="mdc-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+        <div class="mdc-card__supporting-text">
 
-          <div class="mdl-cell mdl-cell--12-col-desktop">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input v-model="testcase.title" class="mdl-textfield__input" type="text">
-              <label class="mdl-textfield__label" for="testcase-name">Name</label>
+          <div class="mdc-cell mdc-cell--12-col-desktop">
+            <div class="mdc-textfield mdc-js-textfield">
+              <input v-model="testcase.title" class="mdc-textfield__input" type="text">
+              <label class="mdc-textfield__label" for="testcase-name">Name</label>
             </div>
           </div>
 
-          <div class="mdl-cell mdl-cell--12-col-desktop">
-            <div class="mdl-textfield mdl-js-textfield">
-              <textarea v-model="testcase.description" class="mdl-textfield__input" type="text" rows="3"></textarea>
-              <label class="mdl-textfield__label" for="testcase-description">Description</label>
+          <div class="mdc-cell mdc-cell--12-col-desktop">
+            <div class="mdc-textfield mdc-js-textfield">
+              <textarea v-model="testcase.description" class="mdc-textfield__input" type="text" rows="3"></textarea>
+              <label class="mdc-textfield__label" for="testcase-description">Description</label>
             </div>
           </div>
         </div>
       </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <button @click="saveTestCase" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      <div class="mdc-card__actions mdc-card--border">
+        <button @click="saveTestCase" class="mdc-button mdc-button--colored mdc-js-button mdc-js-ripple-effect">
           Save
         </button>
         <button @click="runTestcase">
@@ -33,7 +33,7 @@
 
     <test :test="test" v-for="test in testcase.data.tests" :key="test.id"></test>
 
-    <button @click="addTest" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-test-btn">
+    <button @click="addTest" class="mdc-fab material-icons add-test-btn">
       <i class="material-icons">add</i>
     </button>
   </div>

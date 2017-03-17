@@ -1,19 +1,13 @@
 <template>
-  <div id="app" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
+  <div id="app">
+    <header class="mdc-toolbar mdc-toolbar--fixed">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
         <!-- Title -->
-        <span class="mdl-layout-title">JSRace</span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
-      </div>
+        <span class="mdc-toolbar__title">JSRace</span>
+      </section>
     </header>
 
-    <main class="mdl-layout__content">
+    <main class="mdc-toolbar-fixed-adjust">
       <router-view></router-view>
     </main>
   </div>
@@ -26,16 +20,14 @@ export default {
 </script>
 
 <style>
+  @import "../node_modules/material-components-web/dist/material-components-web.min.css";
+
   .mdl-layout__content {
     padding: 48px 0;
   }
 
-  section.section--center {
+  main {
     max-width: 860px;
-  }
-
-  .mdl-layout__content section {
-    position: relative;
-    margin-bottom: 48px;
+    margin: 0 auto;
   }
 </style>
