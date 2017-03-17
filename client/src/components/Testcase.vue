@@ -29,9 +29,9 @@
       </div>
     </section>
 
-    <testResults :results="this.results"></TestResults>
+    <TestResults :results="this.results"></TestResults>
 
-    <test :test="test" v-for="test in testcase.data.tests" :key="test.id"></test>
+    <Test :test="test" v-for="test in testcase.data.tests" :key="test.id"></Test>
 
     <button @click="addTest" class="mdc-fab material-icons add-test-btn">
       <i class="material-icons">add</i>

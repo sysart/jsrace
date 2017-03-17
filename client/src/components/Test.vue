@@ -6,33 +6,21 @@
           <input v-model="test.name" class="mdc-textfield__input" type="text">
           <label class="mdc-textfield__label" for="test-name">Test name</label>
         </div>
-
-        <codemirror v-model="test.code" :options="editorOption"></codemirror>
+        <CodeEditor v-model="test.code"></CodeEditor>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { codemirror } from 'vue-codemirror'
+import CodeEditor from './CodeEditor'
 
 export default {
   name: 'test',
   components: {
-    codemirror
+    CodeEditor
   },
-  props: ['test'],
-  data () {
-    return {
-      editorOption: {
-        lineNumbers: true,
-        line: true,
-        mode: 'text/javascript',
-        matchBrackets: true,
-        theme: 'monokai'
-      }
-    }
-  }
+  props: ['test']
 }
 </script>
 
