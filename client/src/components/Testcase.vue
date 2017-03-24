@@ -4,11 +4,14 @@
       <div class="col s12">
         <div class="card">
           <div class="card-content">
+            <span class="card-title">Details</span>
             <div class="row">
               <div class="col s12 input-field">
                 <input v-model="testcase.title" type="text">
                 <label for="testcase-name" class="active">Name</label>
               </div>
+            </div>
+            <div class="row">
 
               <div class="col s12 input-field">
                 <textarea v-model="testcase.description" type="text" rows="3" class="materialize-textarea"></textarea>
