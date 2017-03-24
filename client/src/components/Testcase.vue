@@ -19,7 +19,7 @@
           </div>
 
           <div class="card-action">
-            <a href="#" @click="saveTestCase">Save</a>
+            <a v-if="valid" href="#" @click="saveTestCase">Save</a>
             <a href="#" @click="runTestcase">Run</a>
           </div>
         </div>
@@ -59,6 +59,8 @@ import Api from '../Api'
 import uuid from 'uuid'
 import TestRunner from '../TestRunner'
 import CodeEditor from './CodeEditor'
+import { TestCaseSchema } from '../schemas'
+import Joi from 'joi-browser'
 
 export default {
 
@@ -73,6 +75,8 @@ export default {
   data () {
     return {
       testcase: {
+        title: '',
+        description: '',
         data: {
           setup: '',
           tests: [
@@ -85,6 +89,12 @@ export default {
         }
       },
       results: null
+    }
+  },
+
+  computed: {
+    valid () {
+      return !Joi.validate(this.testcase, TestCaseSchema).error
     }
   },
 
