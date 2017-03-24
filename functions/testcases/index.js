@@ -17,7 +17,7 @@ module.exports.create = (event, context, callback) => {
 
   if(validation.error) {
     console.error(validation.error);
-    callback(new Error('Invalid data'));
+    callback(new Error('[400] Invalid data'));
     return;
   }
 
@@ -35,7 +35,7 @@ module.exports.create = (event, context, callback) => {
   dynamoDb.put(params, (error, result) => {
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create item.'));
+      callback(new Error('[500] Couldn\'t create item.'));
       return;
     }
 
@@ -56,7 +56,7 @@ module.exports.get = (event, context, callback) => {
   dynamoDb.get(params, (error, result) => {
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t fetch the todo item.'));
+      callback(new Error('[500] Couldn\'t fetch the todo item.'));
       return;
     }
 
@@ -78,7 +78,7 @@ module.exports.list = (event, ctx, cb) => {
   dynamoDb.scan(params, (err, data) => {
     if(err) {
       console.error(err);
-      cb(new Error('An error occured'));
+      cb(new Error('[500] An error occured'));
       return;
     }
 
