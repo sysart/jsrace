@@ -1,5 +1,5 @@
 <template>
-  <codemirror :value="value" @input="codeChanged" :options="editorOption"></codemirror>
+  <codemirror :value="value" @input="codeChanged" :options="editorOptions"></codemirror>
 </template>
 
 <script>
@@ -14,12 +14,19 @@ export default {
   ],
   data () {
     return {
-      editorOption: {
+      editorOptions: {
         lineNumbers: true,
         line: true,
-        mode: 'text/javascript',
+        mode: {
+          name: 'javascript',
+          json: true
+        },
         matchBrackets: true,
-        theme: 'monokai'
+        theme: 'monokai',
+        lint: {
+          asi: true
+        },
+        gutters: ['CodeMirror-linenumbers', 'CodeMirror-lint-markers']
       }
     }
   },
