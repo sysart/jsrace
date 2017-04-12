@@ -12,18 +12,23 @@
               </div>
             </div>
             <div class="row">
-
               <div class="col s12 input-field">
                 <textarea v-model="testcase.description" type="text" rows="3" class="materialize-textarea"></textarea>
                 <label for="testcase-description" class="active">Description</label>
               </div>
             </div>
-
           </div>
 
           <div class="card-action">
-            <a v-if="valid" href="#" @click.prevent="saveTestCase">Save</a>
-            <a href="#" @click.prevent="runTestcase">Run</a>
+            <button
+              class="waves-effect waves-light btn"
+              :disabled="!valid || saving"
+              :class="{disabled: !valid}"
+              @click="saveTestCase"
+            >
+              {{saving ? 'Saving' : 'Save'}}
+            </button>
+            <button class="waves-effect waves-light btn blue" @click="runTestcase">Run</button>
           </div>
         </div>
       </div>
@@ -49,9 +54,11 @@
       @remove="removeTest"
     ></Test>
 
-    <button @click="addTest" class="btn-floating btn-large green add-test-btn">
-      <i class="material-icons">add</i>
-    </button>
+    <div class="add-test-btn">
+      <button @click="addTest" class="btn-floating btn-large waves-effect waves-light green">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -81,6 +88,7 @@ export default {
 
   data () {
     return {
+      saving: false,
       testcase: {
         title: '',
         description: '',
@@ -121,6 +129,10 @@ export default {
         name: '',
         code: ''
       })
+
+      setTimeout(() => {
+        document.body.scrollTop = document.body.scrollHeight
+      })
     },
 
     removeTest (test) {
@@ -131,6 +143,12 @@ export default {
     },
 
     saveTestCase () {
+      if (!this.valid) {
+        return
+      }
+
+      this.saving = true
+
       Api.save(this.testcase).then(response => {
         this.$router.push({
           name: 'testcase',
@@ -138,6 +156,8 @@ export default {
             id: response.id
           }
         })
+
+        this.saving = false
       })
     },
 
@@ -149,13 +169,14 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
   .add-test-btn {
     position: fixed;
     bottom: 50px;
     right: 50px;
+  }
+
+  .card-action .btn {
+    width: 150px;
   }
 </style>

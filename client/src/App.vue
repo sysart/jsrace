@@ -17,7 +17,3 @@ export default {
   name: 'app'
 }
 </script>
-
-<style>
-  @import "../node_modules/materialize-css/dist/css/materialize.min.css";
-</style>

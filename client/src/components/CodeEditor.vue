@@ -1,5 +1,5 @@
 <template>
-  <codemirror :value="code" @input="codeChanged" :options="editorOptions"></codemirror>
+  <codemirror :code="code" @change="codeChanged" :options="editorOptions"></codemirror>
 </template>
 
 <script>

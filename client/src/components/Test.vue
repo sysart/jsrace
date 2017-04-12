@@ -15,7 +15,7 @@
         </div>
 
         <div class="card-action">
-          <a href="#" @click="$emit('remove', test)">Remove</a>
+          <button class="waves-effect waves-light btn red" @click="$emit('remove', test)">Remove</button>
         </div>
       </div>
     </div>

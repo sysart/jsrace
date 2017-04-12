@@ -12,7 +12,7 @@ module.exports = {
     tests: Joi.array().items(
       Joi.object().keys({
         id: Joi.string().required(),
-        name: Joi.string().required(),
+        name: Joi.string(),
         code: Joi.string().required()
       })
     )
