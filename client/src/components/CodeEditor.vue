@@ -24,7 +24,8 @@ export default {
         matchBrackets: true,
         theme: 'monokai',
         lint: {
-          asi: true
+          asi: true,
+          esversion: 6
         },
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-lint-markers']
       }

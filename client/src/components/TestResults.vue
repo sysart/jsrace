@@ -14,7 +14,7 @@
             <tbody>
               <tr v-for="result in results">
                 <td>{{result.test.name}}</td>
-                <td>{{result.hz}}</td>
+                <td>{{result.hz | round}}</td>
                 <td>{{result.count}}</td>
                 <td>
                   <span v-if="result.running" class="badge new blue" data-badge-caption="Running..."></span>
@@ -33,6 +33,11 @@
 export default {
   props: [
     'results'
-  ]
+  ],
+  filters: {
+    round (num) {
+      return Math.round(num)
+    }
+  }
 }
 </script>

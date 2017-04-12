@@ -1,5 +1,5 @@
 import _ from 'lodash'
-const URL = 'https://zy9li26hkf.execute-api.eu-west-1.amazonaws.com/dev'
+const URL = process.env.NODE_ENV === 'development' ? 'https://9wgorjcawa.execute-api.eu-west-1.amazonaws.com/api' : '/api'
 
 export default class Api {
   static save (test) {
