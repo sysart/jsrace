@@ -13,7 +13,7 @@
             </thead>
             <tbody>
               <tr v-for="result in results">
-                <td>{{result.test.name}}</td>
+                <td>{{result.test.name || result.fn}}</td>
                 <template v-if="!result.error">
                   <td>{{result.hz | round | localize}}</td>
                   <td>{{result.count | localize}}</td>
@@ -46,10 +46,14 @@ export default {
   ],
   filters: {
     round (num) {
-      return Math.round(num)
+      if (typeof num === 'number') {
+        return Math.round(num)
+      }
     },
     localize (num) {
-      return num.toLocaleString()
+      if (typeof num === 'number') {
+        return num.toLocaleString()
+      }
     }
   }
 }

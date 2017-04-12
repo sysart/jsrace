@@ -75,6 +75,10 @@ export default {
     CodeEditor
   },
 
+  created () {
+    this.addTest()
+  },
+
   data () {
     return {
       testcase: {
@@ -82,13 +86,7 @@ export default {
         description: '',
         data: {
           setup: '',
-          tests: [
-            {
-              id: uuid.v1(),
-              name: 'Test 1',
-              code: ''
-            }
-          ]
+          tests: []
         }
       },
       results: null
