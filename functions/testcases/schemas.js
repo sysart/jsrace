@@ -4,6 +4,7 @@ const Joi = require('joi');
 
 module.exports = {
   id: Joi.string(),
+  createdAt: Joi.number(),
   title: Joi.string().required(),
   description: Joi.string(),
   data: Joi.object().keys({

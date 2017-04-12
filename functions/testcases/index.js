@@ -3,7 +3,7 @@
 const uuid = require('uuid');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const Joi = require('joi');
-const schema = require('./schema');
+const schema = require('./schemas');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const headers = {

@@ -78,6 +78,10 @@ resources:
     UsagePlan:
       Type: AWS::ApiGateway::UsagePlan
       Properties:
+        ApiStages:
+          - ApiId:
+              Ref: "ApiGatewayRestApi"
+            Stage: ${self:provider.stage}
         Quota:
           Limit: 1000
           Period: DAY

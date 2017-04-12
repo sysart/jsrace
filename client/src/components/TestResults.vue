@@ -14,12 +14,22 @@
             <tbody>
               <tr v-for="result in results">
                 <td>{{result.test.name}}</td>
-                <td>{{result.hz | round}}</td>
-                <td>{{result.count}}</td>
-                <td>
-                  <span v-if="result.running" class="badge new blue" data-badge-caption="Running..."></span>
-                  <span v-if="result.fastest" class="badge new" data-badge-caption="Fastest!"></span>
-                </td>
+                <template v-if="!result.error">
+                  <td>{{result.hz | round | localize}}</td>
+                  <td>{{result.count | localize}}</td>
+                  <td>
+                    <span v-if="result.running" class="badge new blue" data-badge-caption="Running..."></span>
+                    <span v-if="result.fastest" class="badge new" data-badge-caption="Fastest!"></span>
+                  </td>
+                </template>
+                <template v-else>
+                  <td colspan="2">
+                    {{result.error}}
+                  </td>
+                  <td>
+                    <span class="badge new red" data-badge-caption="Error"></span>
+                  </td>
+                </template>
               </tr>
             </tbody>
           </table>
@@ -37,6 +47,9 @@ export default {
   filters: {
     round (num) {
       return Math.round(num)
+    },
+    localize (num) {
+      return num.toLocaleString()
     }
   }
 }

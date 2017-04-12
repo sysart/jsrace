@@ -31,6 +31,9 @@ export default class TestRunner {
         onStart: () => {
           benchmarkResult.running = true
         },
+        onError: (error) => {
+          benchmarkResult.error = error.message.message
+        },
         onComplete: () => {
           benchmarkResult.running = false
           KEYS.forEach(k => {
@@ -47,7 +50,8 @@ export default class TestRunner {
         count: null,
         hz: null,
         running: false,
-        fastest: false
+        fastest: false,
+        error: false
       }
 
       benchmarkMap.set(benchmark.id, benchmarkResult)
@@ -57,8 +61,10 @@ export default class TestRunner {
 
     suite.on('complete', () => {
       const benchmark = suite.filter('fastest')[0]
-      let benchmarkResult = benchmarkMap.get(benchmark.id)
-      benchmarkResult.fastest = true
+      if (benchmark && benchmark.id) {
+        let benchmarkResult = benchmarkMap.get(benchmark.id)
+        benchmarkResult.fastest = true
+      }
     })
 
     suite.run({

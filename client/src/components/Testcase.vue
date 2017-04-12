@@ -22,8 +22,8 @@
           </div>
 
           <div class="card-action">
-            <a v-if="valid" href="#" @click="saveTestCase">Save</a>
-            <a href="#" @click="runTestcase">Run</a>
+            <a v-if="valid" href="#" @click.prevent="saveTestCase">Save</a>
+            <a href="#" @click.prevent="runTestcase">Run</a>
           </div>
         </div>
       </div>

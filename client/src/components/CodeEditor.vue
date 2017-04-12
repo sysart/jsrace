@@ -1,5 +1,5 @@
 <template>
-  <codemirror :value="value" @input="codeChanged" :options="editorOptions"></codemirror>
+  <codemirror :value="code" @input="codeChanged" :options="editorOptions"></codemirror>
 </template>
 
 <script>
@@ -29,6 +29,11 @@ export default {
         },
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-lint-markers']
       }
+    }
+  },
+  computed: {
+    code () {
+      return this.value || ''
     }
   },
   methods: {
