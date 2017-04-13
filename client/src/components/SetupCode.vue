@@ -3,6 +3,7 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">Setup code</span>
+        <p>This is ran before every test run. Inside tests you can access variables and functions defined here.</p>
         <CodeEditor v-model="testcase.data.setup"></CodeEditor>
       </div>
       <div class="card-action">
