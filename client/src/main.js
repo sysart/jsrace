@@ -1,11 +1,3 @@
-window.JSHINT = require('jshint').JSHINT
-require('codemirror/addon/selection/active-line.js')
-require('codemirror/addon/selection/mark-selection.js')
-require('codemirror/addon/lint/lint.js')
-require('codemirror/addon/lint/javascript-lint.js')
-
-require('codemirror/addon/lint/lint.css')
-
 require('materialize-css/dist/js/materialize.js')
 require('materialize-css/dist/css/materialize.min.css')
 
