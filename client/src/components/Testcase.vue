@@ -4,8 +4,10 @@
       <div class="col s12">
         <TestDetails
           :testcase="testcase"
+          :active="active"
           :saving="saving"
           :valid="valid"
+          :running="result && result.running"
           @saveTestCase="saveTestCase"
           @runTests="runTests"
         ></TestDetails>
@@ -14,24 +16,28 @@
 
     <div class="row">
       <div class="col s12">
-        <TestResults :results="results"></TestResults>
+        <TestResults :result="result"></TestResults>
       </div>
     </div>
 
     <div class="row">
       <div class="col s12">
-        <SetupCode :testcase="testcase"></SetupCode>
+        <SetupCode
+          :testcase="testcase"
+          :active="active"
+        ></SetupCode>
       </div>
     </div>
 
     <div
       class="row"
-      v-for="test in testcase.data.tests"
+      v-for="test in tests"
       :key="test.id"
     >
       <div class="col s12">
         <Test
-          :test="test"
+          :data="test"
+          :active="active"
           @remove="removeTest"
         ></Test>
       </div>
@@ -39,7 +45,11 @@
 
     <div class="row">
       <div class="col s12 center-align">
-        <button @click="addTest" class="waves-effect waves-light btn green">
+        <button
+          @click="addTest"
+          class="waves-effect waves-light btn green"
+          :disabled="active"
+        >
           Add
         </button>
       </div>
@@ -67,26 +77,44 @@ export default {
   },
 
   created () {
-    this.addTest()
+    this.reset()
   },
 
   data () {
     return {
       saving: false,
-      testcase: {
-        title: '',
-        description: '',
-        data: {
-          tests: []
-        }
-      },
-      results: null
+      testcase: null,
+      result: null
     }
   },
 
   computed: {
+    active () {
+      return this.saving || (this.result && this.result.running)
+    },
     valid () {
       return !Joi.validate(this.testcase, TestCaseSchema).error
+    },
+    tests () {
+      return this.testcase.data.tests.map((test, i) => {
+        return {
+          test,
+          result: this.result && this.result.tests[i]
+        }
+      })
+    }
+  },
+
+  watch: {
+    $route (newVal) {
+      this.reset()
+      if (newVal.params.id) {
+        Api.get(newVal.params.id).then(testcase => {
+          this.testcase = testcase
+        }, error => {
+          console.error(error)
+        })
+      }
     }
   },
 
@@ -96,8 +124,8 @@ export default {
         next(vm => {
           vm.testcase = testcase
         })
-      }, err => {
-        console.error(err)
+      }, error => {
+        console.error(error)
         next()
       })
     } else {
@@ -106,12 +134,23 @@ export default {
   },
 
   methods: {
+    reset () {
+      this.testcase = {
+        title: '',
+        description: '',
+        data: {
+          tests: []
+        }
+      }
+      this.addTest()
+    },
     addTest () {
       this.testcase.data.tests.push({
         id: uuid.v1(),
         name: '',
         code: ''
       })
+      this.result = null
     },
 
     removeTest (test) {
@@ -119,11 +158,12 @@ export default {
       if (i !== -1) {
         this.testcase.data.tests.splice(i, 1)
       }
+      this.result = null
     },
 
     runTests () {
       const runner = new TestRunner(this.testcase.data)
-      this.results = runner.run()
+      this.result = runner.run()
     },
 
     saveTestCase () {

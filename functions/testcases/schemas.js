@@ -9,7 +9,7 @@ module.exports = {
   description: Joi.string(),
   data: Joi.object().keys({
     setup: Joi.string().allow(''),
-    tests: Joi.array().items(
+    tests: Joi.array().min(1).items(
       Joi.object().keys({
         id: Joi.string().required(),
         name: Joi.string(),

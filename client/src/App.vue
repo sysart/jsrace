@@ -17,3 +17,13 @@ export default {
   name: 'app'
 }
 </script>
+
+<style>
+.container {
+  padding-bottom: 50px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+</style>

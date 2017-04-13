@@ -17,7 +17,8 @@ require('codemirror/addon/lint/lint.css')
 
 export default {
   props: [
-    'value'
+    'value',
+    'disabled'
   ],
   data () {
     return {
@@ -47,6 +48,9 @@ export default {
       if (newVal !== editorValue) {
         this.editor.setValue(newVal)
       }
+    },
+    disabled (newVal) {
+      this.editor.setOption('readOnly', newVal ? 'nocursor' : false)
     }
   },
   methods: {

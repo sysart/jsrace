@@ -9,20 +9,20 @@
           <th>OPS</th>
           <th style="width: 1px">&nbsp;</th>
         </thead>
-        <tbody>
-          <tr v-for="result in results">
-            <td>{{result.test.name || result.fn}}</td>
-            <template v-if="!result.error">
-              <td>{{result.count | localize}}</td>
-              <td>{{result.hz | round | localize}}</td>
+        <tbody v-if="result">
+          <tr v-for="testResult in result.tests">
+            <td>{{testResult.test.name || testResult.fn}}</td>
+            <template v-if="!testResult.error">
+              <td>{{testResult.count | localizeNumber}}</td>
+              <td>{{testResult.hz | roundNumber | localizeNumber}}</td>
               <td>
-                <span v-if="result.running" class="badge new blue" data-badge-caption="Running..."></span>
-                <span v-if="result.fastest" class="badge new" data-badge-caption="Fastest!"></span>
+                <span v-if="testResult.running" class="badge new blue" data-badge-caption="Running..."></span>
+                <span v-if="testResult.fastest" class="badge new" data-badge-caption="Fastest!"></span>
               </td>
             </template>
             <template v-else>
               <td colspan="2">
-                {{result.error}}
+                {{testResult.error}}
               </td>
               <td>
                 <span class="badge new red" data-badge-caption="Error"></span>
@@ -36,21 +36,11 @@
 </template>
 
 <script>
+import '../filters'
+
 export default {
   props: [
-    'results'
-  ],
-  filters: {
-    round (num) {
-      if (typeof num === 'number') {
-        return Math.round(num)
-      }
-    },
-    localize (num) {
-      if (typeof num === 'number') {
-        return num.toLocaleString()
-      }
-    }
-  }
+    'result'
+  ]
 }
 </script>

@@ -20,7 +20,11 @@ export default class TestRunner {
   }
 
   run () {
-    let results = []
+    let result = {
+      tests: [],
+      running: true
+    }
+
     let benchmarkMap = new Map()
     const suite = new Benchmark.Suite('test')
 
@@ -56,7 +60,7 @@ export default class TestRunner {
 
       benchmarkMap.set(benchmark.id, benchmarkResult)
 
-      results.push(benchmarkResult)
+      result.tests.push(benchmarkResult)
     })
 
     suite.on('complete', () => {
@@ -65,12 +69,15 @@ export default class TestRunner {
         let benchmarkResult = benchmarkMap.get(benchmark.id)
         benchmarkResult.fastest = true
       }
+      result.running = false
     })
 
-    suite.run({
-      async: true
-    })
+    setTimeout(() => {
+      suite.run({
+        async: true
+      })
+    }, 500)
 
-    return results
+    return result
   }
 }

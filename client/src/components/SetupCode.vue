@@ -7,13 +7,21 @@
         <CodeEditor v-model="testcase.data.setup"></CodeEditor>
       </div>
       <div class="card-action">
-        <button class="waves-effect waves-light btn red" @click="removeSetupCode">Remove</button>
+        <button
+          class="waves-effect waves-light btn red"
+          @click="removeSetupCode"
+          :disabled="active"
+        >Remove</button>
       </div>
     </div>
   </div>
 
   <div v-else class="center-align">
-    <button @click="addSetupCode" class="waves-effect waves-light btn green">
+    <button
+      @click="addSetupCode"
+      class="waves-effect waves-light btn green"
+      :disabled="active"
+    >
       Add Setup Code
     </button>
   </div>
@@ -28,7 +36,10 @@ export default {
     CodeEditor
   },
 
-  props: ['testcase'],
+  props: [
+    'testcase',
+    'active'
+  ],
 
   methods: {
     addSetupCode () {
