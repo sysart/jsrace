@@ -111,6 +111,9 @@ export default {
       if (newVal.params.id) {
         Api.get(newVal.params.id).then(testcase => {
           this.testcase = testcase
+          setTimeout(() => {
+            Materialize.updateTextFields()
+          })
         }, error => {
           console.error(error)
         })
