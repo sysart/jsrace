@@ -13,6 +13,7 @@ module.exports = {
       Joi.object().keys({
         id: Joi.string().required(),
         name: Joi.string(),
+        defer: Joi.boolean(),
         code: Joi.string().required()
       })
     )

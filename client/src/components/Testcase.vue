@@ -14,11 +14,13 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col s12">
-        <TestResults :result="result"></TestResults>
+    <BlockTransition>
+      <div class="row" v-show="result">
+        <div class="col s12">
+          <TestResults :result="result"></TestResults>
+        </div>
       </div>
-    </div>
+    </BlockTransition>
 
     <div class="row">
       <div class="col s12">
@@ -67,13 +69,15 @@ import uuid from 'uuid'
 import SetupCode from './SetupCode'
 import TestDetails from './TestDetails'
 import TestRunner from '../TestRunner'
+import BlockTransition from './BlockTransition'
 
 export default {
   components: {
     Test,
     TestResults,
     SetupCode,
-    TestDetails
+    TestDetails,
+    BlockTransition
   },
 
   created () {
@@ -107,7 +111,6 @@ export default {
 
   watch: {
     $route (newVal) {
-      this.reset()
       if (newVal.params.id) {
         Api.get(newVal.params.id).then(testcase => {
           this.testcase = testcase
@@ -117,6 +120,8 @@ export default {
         }, error => {
           console.error(error)
         })
+      } else {
+        this.reset()
       }
     }
   },
@@ -151,7 +156,8 @@ export default {
       this.testcase.data.tests.push({
         id: uuid.v1(),
         name: '',
-        code: ''
+        code: '',
+        defer: false
       })
       this.result = null
     },

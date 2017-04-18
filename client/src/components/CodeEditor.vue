@@ -22,6 +22,7 @@ export default {
   ],
   data () {
     return {
+      code: this.value,
       editorOptions: {
         value: this.value,
         autofocus: false,
@@ -47,22 +48,19 @@ export default {
       const editorValue = this.editor.getValue()
       if (newVal !== editorValue) {
         this.editor.setValue(newVal)
+        this.code = newVal
       }
     },
     disabled (newVal) {
       this.editor.setOption('readOnly', newVal ? 'nocursor' : false)
     }
   },
-  methods: {
-    codeChanged (code) {
-      this.$emit('input', code)
-    }
-  },
   mounted () {
     this.editor = new CodeMirror(this.$el, this.editorOptions)
 
     this.editor.on('change', (cm) => {
-      this.$emit('input', cm.getValue())
+      this.code = cm.getValue()
+      this.$emit('input', this.code)
     })
   },
   beforeDestroy () {

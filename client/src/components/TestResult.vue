@@ -13,8 +13,8 @@
         <small>ops</small>
       </h5>
       <h6 class="grey-text">
-        {{result.count | localizeNumber}}
-        <small>samples</small>
+        {{result.count | localizeNumber}} <small>samples</small><br/>
+        {{result.cycles | localizeNumber}} <small>cycles</small>
       </h6>
       <h4 class="blue-text" v-if="result.fastest">
         Fastest!

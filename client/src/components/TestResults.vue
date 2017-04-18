@@ -5,16 +5,18 @@
       <table>
         <thead>
           <th>Name</th>
-          <th>Samples</th>
-          <th>OPS</th>
+          <th class="right-align">Samples</th>
+          <th class="right-align">Cycles</th>
+          <th class="right-align">OPS</th>
           <th style="width: 1px">&nbsp;</th>
         </thead>
         <tbody v-if="result">
           <tr v-for="testResult in result.tests">
             <td>{{testResult.test.name || testResult.fn}}</td>
             <template v-if="!testResult.error">
-              <td>{{testResult.count | localizeNumber}}</td>
-              <td>{{testResult.hz | roundNumber | localizeNumber}}</td>
+              <td class="right-align">{{testResult.count | localizeNumber}}</td>
+              <td class="right-align">{{testResult.cycles | localizeNumber}}</td>
+              <td class="right-align">{{testResult.hz | roundNumber | localizeNumber}}</td>
               <td>
                 <span v-if="testResult.running" class="badge new blue" data-badge-caption="Running..."></span>
                 <span v-if="testResult.fastest" class="badge new" data-badge-caption="Fastest!"></span>

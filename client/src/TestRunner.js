@@ -4,7 +4,8 @@ import BenchmarkInit from 'benchmark'
 
 const KEYS = [
   'hz',
-  'count'
+  'count',
+  'cycles'
 ]
 
 const Benchmark = BenchmarkInit.runInContext({
@@ -30,6 +31,7 @@ export default class TestRunner {
 
     this.data.tests.forEach(test => {
       suite.add(test.name, test.code, {
+        defer: test.defer,
         setup: this.data.setup,
 
         onStart: () => {
