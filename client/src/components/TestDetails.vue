@@ -6,44 +6,38 @@
     </div>
 
     <div class="card-action">
-      <button
-        class="waves-effect waves-light btn"
+      <ActionButton
         :disabled="!valid || active"
         :class="{disabled: !valid}"
         @click="$emit('saveTestCase')"
       >
-        {{saving ? 'Saving' : 'Save'}}
-      </button>
-      <button
-        class="waves-effect waves-light btn blue"
+        <i class="material-icons left">save</i>
+        Save
+      </ActionButton>
+      <ActionButton
         @click="$emit('runTests')"
         :disabled="active"
       >
-        {{running ? 'Running' : 'Run'}}
-      </button>
+        <i class="material-icons left">play_arrow</i>
+        Run
+      </ActionButton>
     </div>
   </div>
 </template>
 
 <script>
 import TextField from './TextField'
+import ActionButton from './ActionButton'
 
 export default {
   components: {
-    TextField
+    TextField,
+    ActionButton
   },
   props: [
     'testcase',
     'valid',
-    'active',
-    'saving',
-    'running'
+    'active'
   ]
 }
 </script>
-
-<style scoped>
-  .card-action .btn {
-    width: 150px;
-  }
-</style>

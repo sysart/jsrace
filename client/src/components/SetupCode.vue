@@ -9,24 +9,17 @@
             <CodeEditor v-model="testcase.data.setup"></CodeEditor>
           </div>
           <div class="card-action">
-            <button
-              class="waves-effect waves-light btn red"
-              @click="removeSetupCode"
-              :disabled="active"
-            >Remove</button>
+            <ActionButton @click="removeSetupCode" :disabled="active">
+              <i class="material-icons left">delete</i>
+              Remove
+            </ActionButton>
           </div>
         </div>
       </div>
     </BlockTransition>
 
     <div v-if="testcase.data.setup === undefined" class="center-align">
-      <button
-        @click="addSetupCode"
-        class="waves-effect waves-light btn green"
-        :disabled="active"
-      >
-        Add Setup Code
-      </button>
+      <ActionButton @click="addSetupCode" :disabled="active">Add Setup Code</ActionButton>
     </div>
   </div>
 </template>
@@ -35,11 +28,13 @@
 import Vue from 'vue'
 import CodeEditor from './CodeEditor'
 import BlockTransition from './BlockTransition'
+import ActionButton from './ActionButton'
 
 export default {
   components: {
     CodeEditor,
-    BlockTransition
+    BlockTransition,
+    ActionButton
   },
 
   props: [

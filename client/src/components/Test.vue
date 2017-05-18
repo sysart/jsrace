@@ -19,11 +19,10 @@
     </div>
 
     <div class="card-action">
-      <button
-        class="waves-effect waves-light btn red"
-        @click="$emit('remove', data.test)"
-        :disabled="active"
-      >Remove</button>
+      <ActionButton @click="$emit('remove', data.test)" :disabled="active">
+        <i class="material-icons left">delete</i>
+        Remove
+      </ActionButton>
     </div>
   </div>
 </template>
@@ -33,13 +32,15 @@ import CodeEditor from './CodeEditor'
 import TestResult from './TestResult'
 import TextField from './TextField'
 import CheckBox from './CheckBox'
+import ActionButton from './ActionButton'
 
 export default {
   components: {
     CodeEditor,
     TestResult,
     TextField,
-    CheckBox
+    CheckBox,
+    ActionButton
   },
   props: [
     'data',

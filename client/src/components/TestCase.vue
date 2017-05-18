@@ -5,9 +5,7 @@
         <TestDetails
           :testcase="testcase"
           :active="active"
-          :saving="saving"
           :valid="valid"
-          :running="result && result.running"
           @saveTestCase="saveTestCase"
           @runTests="runTests"
         ></TestDetails>
@@ -47,13 +45,10 @@
 
     <div class="row">
       <div class="col s12 center-align">
-        <button
-          @click="addTest"
-          class="waves-effect waves-light btn green"
-          :disabled="active"
-        >
+        <ActionButton @click="addTest" :disabled="active">
+          <i class="material-icons left">note_add</i>
           Add
-        </button>
+        </ActionButton>
       </div>
     </div>
   </div>
@@ -70,6 +65,7 @@ import SetupCode from './SetupCode'
 import TestDetails from './TestDetails'
 import TestRunner from '../TestRunner'
 import BlockTransition from './BlockTransition'
+import ActionButton from './ActionButton'
 
 export default {
   components: {
@@ -77,7 +73,8 @@ export default {
     TestResults,
     SetupCode,
     TestDetails,
-    BlockTransition
+    BlockTransition,
+    ActionButton
   },
 
   created () {
