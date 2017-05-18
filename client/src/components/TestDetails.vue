@@ -21,6 +21,13 @@
         <i class="material-icons left">play_arrow</i>
         Run
       </ActionButton>
+      <ActionButton
+        @click="$emit('stopTests')"
+        v-if="running"
+      >
+        <i class="material-icons left">stop</i>
+        Stop
+      </ActionButton>
     </div>
   </div>
 </template>
@@ -37,7 +44,8 @@ export default {
   props: [
     'testcase',
     'valid',
-    'active'
+    'active',
+    'running'
   ]
 }
 </script>

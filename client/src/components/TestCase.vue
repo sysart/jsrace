@@ -6,8 +6,10 @@
           :testcase="testcase"
           :active="active"
           :valid="valid"
+          :running="running"
           @saveTestCase="saveTestCase"
           @runTests="runTests"
+          @stopTests="stopTests"
         ></TestDetails>
       </div>
     </div>
@@ -93,6 +95,9 @@ export default {
     active () {
       return this.saving || (this.result && this.result.running)
     },
+    running () {
+      return this.result && this.result.running
+    },
     valid () {
       return !Joi.validate(this.testcase, TestCaseSchema).error
     },
@@ -167,6 +172,13 @@ export default {
     runTests () {
       const runner = new TestRunner(this.testcase.data)
       this.result = runner.run()
+    },
+
+    stopTests () {
+      if (this.result) {
+        this.result.stop()
+        this.result = null
+      }
     },
 
     saveTestCase () {

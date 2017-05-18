@@ -21,13 +21,16 @@ export default class TestRunner {
   }
 
   run () {
-    let result = {
-      tests: [],
-      running: true
-    }
-
     let benchmarkMap = new Map()
     const suite = new Benchmark.Suite('test')
+
+    let result = {
+      tests: [],
+      running: true,
+      stop () {
+        suite.abort()
+      }
+    }
 
     this.data.tests.forEach(test => {
       suite.add(test.name, test.code, {
