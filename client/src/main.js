@@ -1,4 +1,3 @@
-// require('materialize-css/dist/js/materialize.js')
 require('materialize-css/dist/css/materialize.min.css')
 
 // The Vue build version to load with the `import` command
