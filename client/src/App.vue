@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="light-blue">
+    <nav>
       <div class="nav-wrapper container">
         <a href="#" class="brand-logo center">JsRace</a>
       </div>
