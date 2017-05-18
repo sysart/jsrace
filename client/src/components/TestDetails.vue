@@ -1,18 +1,8 @@
 <template>
   <div class="card">
     <div class="card-content">
-      <div class="row">
-        <div class="col s12 input-field">
-          <input v-model="testcase.title" type="text" :disabled="active" />
-          <label for="testcase-name" class="active">Name</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12 input-field">
-          <textarea v-model="testcase.description" type="text" rows="3" class="materialize-textarea" :disabled="active"></textarea>
-          <label for="testcase-description" class="active">Description</label>
-        </div>
-      </div>
+      <TextField label="Name" v-model="testcase.title" :disabled="active"/>
+      <TextField label="Description" v-model="testcase.description" :disabled="active" multiline/>
     </div>
 
     <div class="card-action">
@@ -36,7 +26,12 @@
 </template>
 
 <script>
+import TextField from './TextField'
+
 export default {
+  components: {
+    TextField
+  },
   props: [
     'testcase',
     'valid',

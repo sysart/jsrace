@@ -1,17 +1,10 @@
 <template>
   <div class="card">
     <div class="card-content">
-
       <div class="row">
-        <div class="col s12 input-field">
-          <input :id="nameInputId" v-model="data.test.name" type="text" :disabled="active"/>
-          <label :for="nameInputId" class="active">Test name</label>
-        </div>
         <div class="col s12">
-          <p>
-            <input :id="deferInputId" v-model="data.test.defer" type="checkbox" :disabled="active"/>
-            <label :for="deferInputId" class="active">Deferred</label>
-          </p>
+          <TextField label="Test name" v-model="data.test.name" :disabled="active"/>
+          <CheckBox label="Deferred" v-model="data.test.defer" :disabled="active"/>
         </div>
       </div>
 
@@ -38,22 +31,20 @@
 <script>
 import CodeEditor from './CodeEditor'
 import TestResult from './TestResult'
+import TextField from './TextField'
+import CheckBox from './CheckBox'
 
 export default {
   components: {
     CodeEditor,
-    TestResult
+    TestResult,
+    TextField,
+    CheckBox
   },
   props: [
     'data',
     'active'
   ],
-  data () {
-    return {
-      nameInputId: Math.random().toString(36).slice(2),
-      deferInputId: Math.random().toString(36).slice(2)
-    }
-  },
   watch: {
     'data.test.defer' (newVal, oldVal) {
       if (newVal && this.data.test.code.indexOf('deferred') === -1) {
